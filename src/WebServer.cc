@@ -55,9 +55,20 @@
 #include <sys/types.h>
 #include <errno.h> 
 #include <stdlib.h>
+
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <sstream>
 #include <iostream>
 #include <algorithm>
+
+#endif // USE_USTL
+
 #include <fcntl.h>
 
 #include "libnavajo/WebServer.hh"
@@ -827,7 +838,7 @@ std::string WebServer::getHttpHeader(const char *messageType, const size_t len, 
   
   if (len)
   {
-    std::stringstream lenSS; lenSS << len;
+    std::ostringstream lenSS; lenSS << len;
     header+="Content-Length: "+lenSS.str()+ "\r\n";
   }
  
@@ -1421,7 +1432,7 @@ std::string WebServer::base64_decode(const std::string& encoded_string)
       char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
 
       for (i = 0; (i < 3); i++)
-        ret += char_array_3[i];
+        ret += (char)char_array_3[i];
       i = 0;
     }
   }
@@ -1438,7 +1449,7 @@ std::string WebServer::base64_decode(const std::string& encoded_string)
     char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
     char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
 
-    for (j = 0; (j < i - 1); j++) ret += char_array_3[j];
+    for (j = 0; (j < i - 1); j++) ret += (char)char_array_3[j];
   }
 
   return ret;

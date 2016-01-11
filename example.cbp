@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="example" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="example" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="example" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add option="-DUSE_USTL=1" />
+			<Add option="-DLINUX=1" />
+			<Add option="-D_REENTRANT=1" />
+			<Add option="-DLIBNAVAJO_SOFTWARE_VERSION=" />
+			<Add option="-DLIBNAVAJO_BUILD_DATE=" />
+			<Add directory="include" />
+			<Add directory="../../../../local/include" />
+		</Compiler>
+		<Linker>
+			<Add library="pthread" />
+			<Add library="pam" />
+			<Add library="ssl" />
+			<Add library="crypto" />
+			<Add library="z" />
+			<Add library="ustl" />
+			<Add directory="../../../../local/lib" />
+		</Linker>
+		<Unit filename="examples/1_basic/PrecompiledRepository.cc" />
+		<Unit filename="examples/1_basic/example.cc" />
+		<Unit filename="include/libnavajo/AuthPAM.hh" />
+		<Unit filename="include/libnavajo/DynamicPage.hh" />
+		<Unit filename="include/libnavajo/DynamicRepository.hh" />
+		<Unit filename="include/libnavajo/HttpRequest.hh" />
+		<Unit filename="include/libnavajo/HttpResponse.hh" />
+		<Unit filename="include/libnavajo/HttpSession.hh" />
+		<Unit filename="include/libnavajo/IpAddress.hh" />
+		<Unit filename="include/libnavajo/LocalRepository.hh" />
+		<Unit filename="include/libnavajo/LogFile.hh" />
+		<Unit filename="include/libnavajo/LogOutput.hh" />
+		<Unit filename="include/libnavajo/LogRecorder.hh" />
+		<Unit filename="include/libnavajo/LogStdOutput.hh" />
+		<Unit filename="include/libnavajo/LogSyslog.hh" />
+		<Unit filename="include/libnavajo/PrecompiledRepository.hh" />
+		<Unit filename="include/libnavajo/WebRepository.hh" />
+		<Unit filename="include/libnavajo/WebServer.hh" />
+		<Unit filename="include/libnavajo/WebSocket.hh" />
+		<Unit filename="include/libnavajo/htonll.h" />
+		<Unit filename="include/libnavajo/libnavajo.hh" />
+		<Unit filename="include/libnavajo/nvj_gzip.h" />
+		<Unit filename="include/libnavajo/thread.h" />
+		<Unit filename="src/AuthPAM.cc" />
+		<Unit filename="src/LocalRepository.cc" />
+		<Unit filename="src/LogFile.cc" />
+		<Unit filename="src/LogRecorder.cc" />
+		<Unit filename="src/LogStdOutput.cc" />
+		<Unit filename="src/LogSyslog.cc" />
+		<Unit filename="src/WebServer.cc" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

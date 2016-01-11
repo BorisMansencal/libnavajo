@@ -16,8 +16,6 @@
 
 #include "libnavajo/LogOutput.hh"
 
-
-
   /**
   * LogStdOutput - LogOutput 
   */

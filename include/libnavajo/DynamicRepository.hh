@@ -14,8 +14,17 @@
 #ifndef DYNAMICREPOSITORY_HH_
 #define DYNAMICREPOSITORY_HH_
 
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <string>
 #include <map>
+
+#endif // USE_USTL
 
 #include "libnavajo/WebRepository.hh"
 
@@ -42,7 +51,7 @@ class DynamicRepository : public WebRepository
     inline virtual bool getFile(HttpRequest* request, HttpResponse *response)
     {
       string url = request->getUrl();
-      while (url.size() && url[0]=='/') url.erase(0, 1);
+      while (url.size() && url[0]=='/') url.erase((size_t)0, 1);
       pthread_mutex_lock( &_mutex );
       IndexMap::const_iterator i = indexMap.find (url);
       if (i == indexMap.end())

@@ -56,7 +56,7 @@ class MyDynamicPage: public DynamicPage
     else
       content+="param1 hasn't been set";
 
-    stringstream myAttributess; myAttributess << *cptExample;
+    ostringstream myAttributess; myAttributess << *cptExample;
     content+="<BR/>my session attribute myAttribute contains "+myAttributess.str();
 
     content+="</BODY></HTML>";

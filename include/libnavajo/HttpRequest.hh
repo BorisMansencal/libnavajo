@@ -14,13 +14,22 @@
 #ifndef HTTPREQUEST_HH_
 #define HTTPREQUEST_HH_
 
+
 #include "libnavajo/IpAddress.hh"
+
+#ifdef USE_USTL
+#include <ustl.h>
+namespace std=ustl;
+#else
 #include <map>
 #include <vector>
 #include <string>
 #include <sstream>
+#endif // USE_USTL
+
 #include <openssl/ssl.h>
 #include "HttpSession.hh"
+
 
 //****************************************************************************
 
@@ -71,8 +80,9 @@ class HttpRequest
           {
             unsigned int specar;
             std::string hexChar=paramstr.substr(end+1,2);
-            std::stringstream ss; ss << std::hex << hexChar.c_str();
-            ss >> specar;
+            sscanf(hexChar.c_str(), "%2X", &specar);
+/*          std::stringstream ss; ss << std::hex << hexChar.c_str();
+            ss >> specar; */
             paramstr[end] = (char)specar;
             paramstr=paramstr.erase(end+1,2);
           }
@@ -113,14 +123,14 @@ class HttpRequest
   
   inline void decodCookies( const std::string& c )
   {
-    std::stringstream ss(c);
+    std::istringstream ss(c);
     std::string theCookie;
     while (std::getline(ss, theCookie, ';')) 
     {
       size_t posEq=0;
       if ((posEq = theCookie.find('=')) != std::string::npos)
       {
-        size_t firstC=0; while (!iswgraph(theCookie[firstC]) && firstC < posEq) { firstC++; };
+        size_t firstC=0; while (!isgraph(theCookie[firstC]) && firstC < posEq) { firstC++; };
 
         if (posEq-firstC > 0 && theCookie.length()-posEq > 0) cookies[theCookie.substr(firstC,posEq-firstC)]=theCookie.substr(posEq+1, theCookie.length()-posEq);
       }

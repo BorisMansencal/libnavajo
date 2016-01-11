@@ -11,9 +11,18 @@
  */
 //********************************************************
 
-#include <stdexcept>
-#include "zlib.h"
+#ifdef USE_USTL
 
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
+#include <stdexcept>
+
+#endif // USE_USTL
+
+#include "zlib.h"
 #define CHUNK 16384
 
 //********************************************************

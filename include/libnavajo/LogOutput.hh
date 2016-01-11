@@ -14,7 +14,16 @@
 #ifndef LOGOUTPUT_HH_
 #define LOGOUTPUT_HH_
 
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <string>
+
+#endif // USE_USTL
 
   typedef enum 
   {

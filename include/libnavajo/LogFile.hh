@@ -14,10 +14,19 @@
 #ifndef LOGFILE_HH_
 #define LOGFILE_HH_
 
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <string>
+
+#endif // USE_USTL
 
 #include "libnavajo/LogOutput.hh"
 

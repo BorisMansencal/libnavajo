@@ -14,8 +14,18 @@
 #ifndef WEBSOCKET_HH_
 #define WEBSOCKET_HH_
 
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <algorithm>
 #include <list>
+
+#endif // USE_USTL
+
 #include "libnavajo/HttpRequest.hh"
 #include "libnavajo/WebServer.hh"
 

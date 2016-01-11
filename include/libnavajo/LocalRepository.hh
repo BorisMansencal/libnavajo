@@ -16,8 +16,18 @@
 
 #include "WebRepository.hh"
 
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <set>
 #include <string>
+
+#endif // USE_USTL
+
 #include "libnavajo/thread.h"
 
 using namespace std;

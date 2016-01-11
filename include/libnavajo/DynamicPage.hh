@@ -14,8 +14,18 @@
 #ifndef DYNAMICPAGE_HH_
 #define DYNAMICPAGE_HH_
 
+#ifndef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <string>
-#include <typeinfo> 
+#include <typeinfo>
+
+#endif // USE_USTL
+
 
 class DynamicPage
 {

@@ -14,12 +14,22 @@
 #ifndef HTTPSESSION_HH_
 #define HTTPSESSION_HH_
 
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <map>
 #include <vector>
 #include <string>
 #include <sstream>
 
+#endif // USE_USTL
+
 #include <stdlib.h>
+
 
 class HttpSession
 {

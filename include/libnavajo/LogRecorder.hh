@@ -14,18 +14,27 @@
 #ifndef LOGRECORDER_HH_
 #define LOGRECORDER_HH_
 
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include <string>
 #include <list>
 #include <set>
+
+#endif // USE_USTL
+
 #include "libnavajo/LogOutput.hh"
 
 #define NVJ_LOG LogRecorder::getInstance()
 
 using namespace std;
-
 
   /**
   * LogRecorder - generic class to handle log trace

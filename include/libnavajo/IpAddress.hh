@@ -14,17 +14,27 @@
 #ifndef IPADDRESS_HH_
 #define IPADDRESS_HH_
 
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <stdexcept>
-#include <errno.h>
 #include <vector>
 #include <string>
 #include <sstream>
+
+#endif // USE_USTL
+
+#include <errno.h>
 #include <string.h>
 
+#include "pthread.h"
 
 #ifdef WIN32
 
-#include "pthread.h"
 #include <winsock2.h> 
 #include <Windows.h>
 #include <in6addr.h>
@@ -272,7 +282,7 @@ class IpNetwork
     inline string strCIDR() const
     {
       string netCIDR=addr.str()+"/";
-      std::stringstream masklengthSs; masklengthSs << (int)mask;
+      std::ostringstream masklengthSs; masklengthSs << (int)mask;
       netCIDR+=masklengthSs.str();
       return netCIDR;
     };

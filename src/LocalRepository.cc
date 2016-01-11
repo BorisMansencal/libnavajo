@@ -16,9 +16,20 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <string.h>
+
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <fstream>
 #include <streambuf>
 #include <sstream>
+
+#endif // USE_USTL
+
 #include "libnavajo/LogRecorder.hh"
 #include "libnavajo/LocalRepository.hh"
 
@@ -38,7 +49,7 @@ bool LocalRepository::loadFilename_dir (const string& alias, const string& path,
     {
       if (!strcmp(entry->d_name,".") || !strcmp(entry->d_name,"..") || !strlen(entry->d_name)) continue;
 
-      std::string filepath=fullPath+'/'+entry->d_name;
+      std::string filepath=fullPath + "/" + entry->d_name;
 
       if (stat(filepath.c_str(), &s) == -1) 
       {
@@ -50,7 +61,7 @@ bool LocalRepository::loadFilename_dir (const string& alias, const string& path,
       if (type == S_IFREG || type == S_IFLNK)
       {
 	string filename=alias+subpath+"/"+entry->d_name;
-	while (filename.size() && filename[0]=='/') filename.erase(0, 1);
+	while (filename.size() && filename[0]=='/') filename.erase((size_t)0, 1);
 	filenamesSet.insert(filename);
       }
 
@@ -68,7 +79,7 @@ void LocalRepository::addDirectory( const string& alias, const string& dirPath)
   char resolved_path[4096];
 
   string newalias=alias;
-  while (newalias.size() && newalias[0]=='/') newalias.erase(0, 1);
+  while (newalias.size() && newalias[0]=='/') newalias.erase((size_t)0, 1);
   while (newalias.size() && newalias[newalias.size()-1]=='/') newalias.erase(newalias.size() - 1);
   
   if (realpath(dirPath.c_str(), resolved_path) == NULL)

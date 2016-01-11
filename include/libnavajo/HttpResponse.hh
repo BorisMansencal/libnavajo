@@ -92,7 +92,7 @@ class HttpResponse
 
       if (maxage)
       {
-        std::stringstream maxageSs; maxageSs << maxage;
+        std::ostringstream maxageSs; maxageSs << maxage;
         cookieEntry+="; Max-Age="+maxageSs.str();
       }
 

@@ -14,7 +14,6 @@
 #ifndef WEBSERVER_HH_
 #define WEBSERVER_HH_
 
-
 #include <stdio.h>
 #include <sys/types.h>
 #ifdef LINUX
@@ -23,15 +22,25 @@
 #define SO_NOSIGPIPE    0x0800
 #endif
 
+#ifdef USE_USTL
+
+#include <ustl.h>
+namespace std=ustl;
+
+#else
+
 #include <queue>
 #include <string>
 #include <map>
+
+#endif // USE_USTL
+
 #include <openssl/ssl.h>
 #include <openssl/err.h>
+
 #include "libnavajo/LogRecorder.hh"
 #include "libnavajo/IpAddress.hh"
 #include "libnavajo/WebRepository.hh"
-
 #include "libnavajo/thread.h"
 #include "libnavajo/nvj_gzip.h"
 
